@@ -10,12 +10,12 @@ const Tasks = () => {
   const { tasks } = useSelector((state) => state.tasksSlice);
   console.log("azir from Task", tasks.status);
 
-  const pendingTasks = tasks.filter((item) => item.status === "running");
   const runningTasks = tasks.filter((item) => item.status === "pending");
-  const doneTasks = tasks.filter((item) => item.status === "done");
+  const pendingTasks = tasks.filter((item) => item.status === "running");
+   const doneTasks = tasks.filter((item) => item.status === "done");
 
   return (
-    <div className="h-screen grid grid-cols-12">
+    <div className="h-screen grid lg:grid-cols-12">
       <div className="col-span-9 px-10 pt-10">
         <div className="flex justify-between items-center">
           <div>

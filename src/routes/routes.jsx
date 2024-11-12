@@ -1,12 +1,14 @@
-import { createBrowserRouter } from 'react-router-dom';
-import App from '../App';
-import Tasks from '../pages/Tasks';
-import Chat from '../pages/Chat';
-import Settings from '../pages/Settings';
-import Profile from '../pages/Profile';
+import { createBrowserRouter } from "react-router-dom";
+import App from "../App";
+import Tasks from "../pages/Tasks";
+import Chat from "../pages/Chat";
+import Settings from "../pages/Settings";
+import Profile from "../pages/Profile";
+import Latest from "../pages/Latest";
+import PostById from "../components/posts/PostById";
 const routes = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
       {
@@ -14,15 +16,23 @@ const routes = createBrowserRouter([
         element: <Tasks />,
       },
       {
-        path: '/chat',
+        path: "/chat",
         element: <Chat />,
       },
       {
-        path: '/settings',
+        path: "/settings",
         element: <Settings />,
       },
       {
-        path: '/profile',
+        path: "/latest",
+        element: <Latest />,
+      },
+      {
+        path: "/postid",
+        element: <PostById />,
+      },
+      {
+        path: "/profile",
         element: <Profile />,
       },
     ],
