@@ -32,9 +32,10 @@ const Signup = () => {
       createUser({
         email,
         password,
+        name,
       })
     );
-    console.log(name, email, password);
+    console.log("SIGNUP page =>", name, email, password);
   };
 
   const handleGoogleLogin = () => {
