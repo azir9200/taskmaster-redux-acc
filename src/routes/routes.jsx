@@ -6,6 +6,8 @@ import Settings from "../pages/Settings";
 import Profile from "../pages/Profile";
 import Latest from "../pages/Latest";
 import PostById from "../components/posts/PostById";
+import Signup from "../pages/user/Signup";
+import Login from "../pages/user/Login";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +32,14 @@ const routes = createBrowserRouter([
       {
         path: "/postid",
         element: <PostById />,
+      },
+      {
+        path: "/signUp",
+        element: <Signup />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "/profile",

@@ -7,8 +7,12 @@ const SetPost = () => {
 
   console.log("object postData", postData);
 
+  //   const onSubmit = (data) => {
+  //     setPost(data);
+  //   };
+
   const onSubmit = (data) => {
-    setPost(data);
+    setPost({ title: "This is my 1st post", body: data.post, userId: 234 });
   };
 
   return (

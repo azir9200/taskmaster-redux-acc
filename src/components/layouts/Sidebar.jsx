@@ -7,7 +7,7 @@ import {
 
 import logo from "../../assets/image/logo.png";
 import { NavLink } from "react-router-dom";
-import { BookOpenIcon } from "@heroicons/react/24/outline";
+import { ArrowLongRightIcon, BookOpenIcon } from "@heroicons/react/24/outline";
 
 const Sidebar = () => {
   return (
@@ -55,6 +55,17 @@ const Sidebar = () => {
           }
         >
           <Cog6ToothIcon className="h-7 w-7 group-hover:text-white " />
+        </NavLink>
+
+        <NavLink
+          to="/signUp"
+          className={({ isActive }) =>
+            isActive
+              ? "p-2 rounded-2xl bg-primary text-white cursor-pointer"
+              : "p-2 rounded-2xl group hover:bg-primary text-secondary/40 cursor-pointer transition-all"
+          }
+        >
+          <ArrowLongRightIcon className="h-7 w-7 group-hover:text-white " />
         </NavLink>
 
         <NavLink
