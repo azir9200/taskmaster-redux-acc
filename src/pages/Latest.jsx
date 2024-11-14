@@ -1,5 +1,4 @@
 import PostsCard from "../components/posts/PostsCard";
-import SetPost from "../components/posts/SetPost";
 import { useGetPostsQuery } from "../redux/api/baseApi";
 
 const Latest = () => {
@@ -12,11 +11,9 @@ const Latest = () => {
   return (
     <div>
       <h1 className="text-center">Latest Update here...</h1>
-      <div>
-        <SetPost />
-      </div>
+      <div>{/* <SetPost /> */}</div>
 
-      <div className="felx flex-col gap-3 ">
+      <div className="flex flex-col gap-3 ">
         {posts?.map((post) => (
           <PostsCard key={post.id} post={post} />
         ))}

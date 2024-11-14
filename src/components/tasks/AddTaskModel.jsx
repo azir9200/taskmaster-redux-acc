@@ -1,18 +1,18 @@
 import { useForm } from "react-hook-form";
 import Modal from "../ui/Modal";
-import { useDispatch } from "react-redux";
-import { addTask } from "../../redux/features/tasks/tasksSlice";
+import { useAddTaskMutation } from "../../redux/api/taskApi";
 
 const AddTaskModel = ({ isOpen, setIsOpen }) => {
   const { register, handleSubmit, reset } = useForm();
-  const dispatch = useDispatch();
-
+  const [addTask, { data, error }] = useAddTaskMutation();
+  console.log("data", data);
+  console.log("error addRaskModal", error);
   const onCancel = () => {
     reset();
     setIsOpen(false);
   };
   const onSubmit = (data) => {
-    dispatch(addTask(data));
+    addTask({ ...data, status: "pending" });
     console.log("azir data", data);
     onCancel();
   };
