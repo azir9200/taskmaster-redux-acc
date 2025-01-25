@@ -3,12 +3,12 @@ import baseApi from "./baseApi";
 const taskApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getTasks: builder.query({
-      query: () => "/tasks",
+      query: () => "/api/v1/tasks",
       providesTags: ["Tasks"],
     }),
     updateTask: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/tasks/${id}`,
+        url: `/api/v1/tasks/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -16,7 +16,7 @@ const taskApi = baseApi.injectEndpoints({
     }),
     addTask: builder.mutation({
       query: (task) => ({
-        url: "/tasks",
+        url: "/api/v1/tasks",
         method: "POST",
         body: task,
       }),

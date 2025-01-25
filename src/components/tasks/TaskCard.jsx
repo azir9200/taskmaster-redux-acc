@@ -3,7 +3,7 @@ import { removeTask } from "../../redux/features/tasks/tasksSlice";
 import { useUpdateTaskMutation } from "../../redux/api/taskApi";
 
 const TaskCard = ({ task }) => {
-  const [updateTask, { data, error }] = useUpdateTaskMutation();
+  const [updateTask, {  error }] = useUpdateTaskMutation();
   // console.log("update task", data, updateTask);
   const handleUpdate = (id, updatedStatus) => {
     const data = {
