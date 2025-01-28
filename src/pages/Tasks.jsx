@@ -4,11 +4,17 @@ import TaskCard from "../components/tasks/TaskCard";
 import { useState } from "react";
 import AddTaskModel from "../components/tasks/AddTaskModel";
 import MenuDropdown from "../components/ui/MenuDropdown";
+import { useGetMeQuery } from "../redux/api/getMeApi";
+import { Link } from "react-router-dom";
 import { useGetTasksQuery } from "../redux/api/taskApi";
 
 const Tasks = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: tasks } = useGetTasksQuery();
+  const { items } = useGetTasksQuery(undefined);
+  const tasks = items?.data;
+  const { data } = useGetMeQuery(undefined);
+  const user = data?.data;
+  console.log("object", user?.name);
 
   const pendingTasks = tasks?.filter((item) => item.status === "pending");
   const runningTasks = tasks?.filter((item) => item.status === "running");
@@ -38,15 +44,26 @@ const Tasks = () => {
                 {" "}
                 Add Task{" "}
               </button>
-              <MenuDropdown>
-                <div className="h-12 w-12 rounded-xl overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=644&q=80"
-                    alt=""
-                    className="object-cover h-full w-full "
-                  />
-                </div>
-              </MenuDropdown>
+              {user ? (
+                <>
+                  <MenuDropdown>
+                    <div className="h-12 w-12 rounded-xl overflow-hidden">
+                      <img
+                        src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=644&q=80"
+                        alt=""
+                        className="object-cover h-full w-full "
+                      />
+                    </div>
+                  </MenuDropdown>
+                </>
+              ) : (
+                <Link
+                  className="rounded-lg backdrop-blur-[2px] p-2 inline-block bg-blue-600 text-white font-bold hover:bg-blue-900 hover:text-white"
+                  to={"/login"}
+                >
+                  Login
+                </Link>
+              )}
             </div>
           </div>
           <div className="grid grid-cols-3 gap-5 mt-10">

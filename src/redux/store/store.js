@@ -1,15 +1,31 @@
 import { configureStore } from "@reduxjs/toolkit";
-import tasksSlice from "./../features/tasks/tasksSlice";
-import userSlice from "./../features/user/userSlice";
-import baseApi from "../api/baseApi";
+import loginReducer from "../features/user/loginSlice";
+import registerReducer from "../features/user/registerSlice";
+import { baseApi } from "../api/baseApi";
+import userReducer from "../features/user/userSlice";
+import tasksReducer from "../features/tasks/tasksSlice";
+import { persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-const store = configureStore({
+const persistUserConfig = {
+  key: "user",
+  storage,
+};
+const persistedUserReducer = persistReducer(persistUserConfig, userReducer);
+
+export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
-    tasksSlice: tasksSlice,
-    userSlice: userSlice,
+    login: loginReducer,
+    register: registerReducer,
+    user: persistedUserReducer,
+    tasks: tasksReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(baseApi.middleware),
+    getDefaultMiddleware({ serializableCheck: false }).concat(
+      baseApi.middleware
+    ),
 });
-export default store;
+
+// Persistor to manage rehydration of state
+export const persistor = persistStore(store);

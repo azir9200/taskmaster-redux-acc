@@ -34,7 +34,7 @@ const routes = createBrowserRouter([
       //   element: <PostById />,
       // },
       {
-        path: "/signUp",
+        path: "/signup",
         element: <Signup />,
       },
       {
