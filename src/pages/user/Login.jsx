@@ -1,14 +1,43 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import loginImage from "../../assets/image/login.svg";
+import { useLoginMutation } from "../../redux/api/authApi";
+import { verifyToken } from "../../redux/features/util";
+import { setUser } from "../../redux/features/user/userSlice";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onSubmit = ({ email, password }) => {
-    // Email Password Login
+  const [login] = useLoginMutation();
 
-    console.log(email, password);
+  const onSubmit = async ({ email, password }) => {
+    try {
+      const result = await login({ name, email, password }).unwrap();
+      console.log("result login", result);
+
+      const user = verifyToken(result.data.accessToken);
+      console.log("user", user);
+      dispatch(setUser({ user: user, token: result.data.accessToken }));
+
+      if (result.success && result.data?.accessToken) {
+        toast.success(
+          <div className="justify-center items-center text-white text-3xl p-22  bg-gradient-to-r from-sky-700 to-yellow-600">
+            {" "}
+            Your login is successfully!{" "}
+          </div>
+        );
+        navigate("/");
+      } else {
+        toast.error("Login failed. Please check your credentials.");
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+      toast.error("An error occurred while logging in.");
+    }
   };
 
   const handleGoogleLogin = () => {

@@ -64,7 +64,7 @@ const Signup = () => {
           <h1 className="mb-10 font-medium text-2xl">Sign up</h1>
           <form className="space-y-5 w-full" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col items-start">
-              <label htmlFor="email">Name</label>
+              <label htmlFor="name">Name</label>
               <input
                 type="text"
                 id="name"
@@ -79,6 +79,15 @@ const Signup = () => {
                 id="email"
                 className="w-full rounded-md"
                 {...register("email")}
+              />
+            </div>
+            <div className="flex flex-col items-start">
+              <label htmlFor="text">Role</label>
+              <input
+                type="text"
+                id="role"
+                className="w-full rounded-md"
+                {...register("role")}
               />
             </div>
             <div className="flex flex-col items-start">
